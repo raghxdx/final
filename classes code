@@ -1,0 +1,15 @@
+import pickle
+
+class Employee:
+    def __init__(self, name, id_number, department, job_title, basic_salary, age, dob, passport_details):
+        self.name = name
+        self.id_number = id_number
+        self.department = department
+        self.job_title = job_title
+        self.basic_salary = basic_salary
+        self.age = age
+        self.dob = dob
+        self.passport_details = passport_details
+
+def __str__(self):
+        return f"Employee ID: {self.id_number}, Name: {self.name}, Department: {self.department}, Job Title: {self.job_title}"
