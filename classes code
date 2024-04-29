@@ -1,44 +1,32 @@
-import pickle
-
 class Employee:
-    def __init__(self, name, id_number, department, job_title, basic_salary, age, dob, passport_details):
+    def __init__(self, name, employee_id, department, job_title, basic_salary, age, date_of_birth, manager_id):
         self.name = name
-        self.id_number = id_number
+        self.employee_id = employee_id
         self.department = department
         self.job_title = job_title
         self.basic_salary = basic_salary
         self.age = age
-        self.dob = dob
-        self.passport_details = passport_details
-
-def __str__(self):
-        return f"Employee ID: {self.id_number}, Name: {self.name}, Department: {self.department}, Job Title: {self.job_title}"
+        self.date_of_birth = date_of_birth
+        self.manager_id = None  
 
 
-#then we start defining the subclass of Employee
-
-class SalesManager(Employee):
-    pass
-
-class Salesperson(Employee):
-    pass
-
-class MarketingManager(Employee):
-    pass
-
-class Marketer(Employee):
-    pass
-
-class Accountant(Employee):
-    pass
-
-class Designer(Employee):
-    pass
-
-class Handyman(Employee):
-    pass
-
-
+class Event:
+    def __init__(self, event_id, event_type, theme, date, time, duration, venue_address):
+        self.event_id = event_id
+        self.event_type = event_type
+        self.theme = theme
+        self.date = date
+        self.time = time
+        self.duration = duration
+        self.venue_address = venue_address
+        self.client_id = None
+        self.guest_list = []
+        self.catering_company = None
+        self.cleaning_company = None
+        self.decorations_company = None
+        self.entertainment_company = None
+        self.furniture_supplier = None
+        self.invoice = None
 
 class Client:
     def __init__(self, client_id, name, address, contact_details, budget):
@@ -48,65 +36,12 @@ class Client:
         self.contact_details = contact_details
         self.budget = budget
 
-
 class Guest:
     def __init__(self, guest_id, name, address, contact_details):
         self.guest_id = guest_id
         self.name = name
         self.address = address
         self.contact_details = contact_details
-
-
-
-
-
-
-
-
-class Supplier:
-    def __init__(self, supplier_id, name, address, contact_details):
-        self.supplier_id = supplier_id
-        self.name = name
-        self.address = address
-        self.contact_details = contact_details
-
-
-#then we define the subclasses of Supplier
-
-class CleaningCompany(Supplier):
-    pass
-
-class DecorationsCompany(Supplier):
-    pass
-
-class EntertainmentCompany(Supplier):
-    pass
-
-class FurnitureSupplyCompany(Supplier):
-    pass
-
-
-
-
-class Event:
-    def __init__(self, event_id, event_type, theme, date, time, duration, venue_address, client_id, guest_list,
-                 catering_company, cleaning_company, decorations_company, entertainment_company, furniture_supply_company, invoice):
-        self.event_id = event_id
-        self.event_type = event_type
-        self.theme = theme
-        self.date = date
-        self.time = time
-        self.duration = duration
-        self.venue_address = venue_address
-        self.client_id = client_id
-        self.guest_list = guest_list
-        self.catering_company = catering_company
-        self.cleaning_company = cleaning_company
-        self.decorations_company = decorations_company
-        self.entertainment_company = entertainment_company
-        self.furniture_supply_company = furniture_supply_company
-        self.invoice = invoice
-
 
 class Venue:
     def __init__(self, venue_id, name, address, contact, min_guests, max_guests):
@@ -117,75 +52,37 @@ class Venue:
         self.min_guests = min_guests
         self.max_guests = max_guests
 
-
-
-class Caterer:
-    def __init__(self, caterer_id, name, address, contact_details, menu, min_guests, max_guests):
-        self.caterer_id = caterer_id
+class Supplier:
+    def __init__(self, supplier_id, name, address, contact_details):
+        self.supplier_id = supplier_id
         self.name = name
         self.address = address
         self.contact_details = contact_details
+
+class Caterer(Supplier):
+    def __init__(self, supplier_id, name, address, contact_details, menu, min_guests, max_guests):
+        super().__init__(supplier_id, name, address, contact_details)
         self.menu = menu
         self.min_guests = min_guests
         self.max_guests = max_guests
 
+class CleaningCompany(Supplier):
+    def __init__(self, supplier_id, name, address, contact_details, services_offered):
+        super().__init__(supplier_id, name, address, contact_details)
+        self.services_offered = services_offered
 
+class DecorationsCompany(Supplier):
+    def __init__(self, supplier_id, name, address, contact_details, services_offered):
+        super().__init__(supplier_id, name, address, contact_details)
+        self.services_offered = services_offered
 
+class EntertainmentCompany(Supplier):
+    def __init__(self, supplier_id, name, address, contact_details, services_offered):
+        super().__init__(supplier_id, name, address, contact_details)
+        self.services_offered = services_offered
 
+class FurnitureSupplier(Supplier):
+    def __init__(self, supplier_id, name, address, contact_details, services_offered):
+        super().__init__(supplier_id, name, address, contact_details)
+        self.services_offered = services_offered
 
-#then we start test cases
-
-def test():
-    #creating employees
-    mariam = SalesManager("Mariam Khalid", 98394, "Sales", "Manager", 37500, 45, "1979-05-15", "AAA111")
-    reem = Salesperson("Reem Ahmed", 11234, "Sales", "Salesperson", 20000, 30, "1994-08-25", "BBB222")
-    
-    #creating clients
-    client1 = Client(1, "A Company", "221 St", "0506122177", 5000)
-    
-    #creating guests
-    guest1 = Guest(1, "Ahmed Khalid", "1000 St", "0562964544")
-    
-    #creating suppliers
-    cleaning_company1 = CleaningCompany(1, "Clean It Up", "101 St", "0501116722")
-    
-    #creating events
-    event1 = Event(1, "Wedding", "Elegant", "2024-06-15", "18:00", 4, "999 St", client1.client_id, [guest1], None, cleaning_company1, None, None, None, None)
-    
-    #creating venues
-    venue1 = Venue(1, "Grand Hall", "272 St", "0542204774", 100, 500)
-    
-    #creating caterers
-    caterer1 = Caterer(1, "Evening Catering", "001 St", "0508882211", "Buffet", 50, 200)
-
-    #then we print employee details
-    print("Employee Details:")
-    print(f"  Mariam: {mariam}")
-    print(f"  Reem: {reem}")
-
-    #then we print client details
-    print("\nClient Details:")
-    print(f"  Name: {client1.name}, Address: {client1.address}, Contact: {client1.contact_details}, Budget: {client1.budget}")
-
-    #then we print guest details
-    print("\nGuest Details:")
-    print(f"  Name: {guest1.name}, Address: {guest1.address}, Contact: {guest1.contact_details}")
-
-    #then we print supplier details
-    print("\nSupplier Details:")
-    print(f"  Cleaning Company: {cleaning_company1.name}, Address: {cleaning_company1.address}, Contact: {cleaning_company1.contact_details}")
-
-    #then we print event details
-    print("\nEvent Details:")
-    print(f"  Type: {event1.event_type}, Theme: {event1.theme}, Date: {event1.date}, Time: {event1.time}, Duration: {event1.duration}, Venue: {event1.venue_address}")
-
-    #then we print venue details
-    print("\nVenue Details:")
-    print(f"  Name: {venue1.name}, Address: {venue1.address}, Contact: {venue1.contact}, Min Guests: {venue1.min_guests}, Max Guests: {venue1.max_guests}")
-
-    #then we print caterer details
-    print("\nCaterer Details:")
-    print(f"  Name: {caterer1.name}, Address: {caterer1.address}, Contact: {caterer1.contact_details}, Menu: {caterer1.menu}, Min Guests: {caterer1.min_guests}, Max Guests: {caterer1.max_guests}")
-
-#finanly run the  test cases
-test()
