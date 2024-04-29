@@ -86,3 +86,44 @@ class FurnitureSupplier(Supplier):
         super().__init__(supplier_id, name, address, contact_details)
         self.services_offered = services_offered
 
+
+
+#test cases
+
+#creating employees
+employee1 = Employee("Susan Meyers", 47899, "Sales", "Manager", 37500, 40, "1984-05-15", None)
+employee2 = Employee("Joy Rogers", 81774, "Sales", "Manager", 24000, 35, "1989-10-20", None)
+employee3 = Employee("Shyam Sundar", 11234, "Sales", "Salesperson", 20000, 30, "1994-02-28", 47899)
+employee4 = Employee("Mariam Khalid", 98394, "Sales", "Salesperson", 20000, 28, "1996-08-10", 81774)
+employee5 = Employee("Salma J Sam", 98637, "Sales", "Salesperson", 20000, 32, "1990-12-05", 47899)
+
+#creating events
+event1 = Event(1, "Wedding", "Classic", "2024-05-25", "15:00", 4, "222 ST")
+event2 = Event(2, "Birthday", "Superhero", "2024-06-10", "14:00", 3, "333 ST")
+
+#creating clients
+client1 = Client(1, "Sara Khalid", "454 ST", "0506110100", 5000)
+client2 = Client(2, "Ahmed Sultan", "444 ST", "0561001555", 8000)
+
+#creating guests
+guest1 = Guest(1, "Reem Mohamed", "101 ST", "0540003333")
+guest2 = Guest(2, "Aisha Ali", "202 ST", "0501112166")
+
+#creating venues
+venue1 = Venue(1, "Hilton Hotel", "202 AD ST", "info@hiltonhotel.com", 50, 200)
+venue2 = Venue(2, "Rose Garden", "303 AD ST", "info@rosegarden.com", 20, 100)
+
+#creating suppliers
+caterer1 = Caterer(1, "Delicious Catering", "007 ST", "catering@delicious.com", "Menu A", 20, 150)
+cleaning_company1 = CleaningCompany(2, "Sparkling Cleaners", "2002 ST", "info@sparklingcleaners.com", "Cleaning Services")
+decorations_company1 = DecorationsCompany(3, "Creative Decor", "505 ST", "contact@creativedecor.com", "Decorations Services")
+entertainment_company1 = EntertainmentCompany(4, "Music & More", "006 ST", "info@musicandmore.com", "Entertainment Services")
+furniture_supplier1 = FurnitureSupplier(5, "Comfort Furniture", "343 ST", "info@comfortfurniture.com", "Furniture Services")
+
+#pritning to display all the information
+print("Employee 1 Name:", employee1.name)
+print("Event 1 Theme:", event1.theme)
+print("Client 2 Name:", client2.name)
+print("Guest 1 Address:", guest1.address)
+print("Venue 2 Contact:", venue2.contact)
+print("Caterer 1 Menu:", caterer1.menu)
