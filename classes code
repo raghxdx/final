@@ -123,7 +123,7 @@ furniture_supplier1 = FurnitureSupplier(5, "Comfort Furniture", "343 ST", "info@
 #pritning to display all the information
 print("Employee 1 Name:", employee1.name)
 print("Event 1 Theme:", event1.theme)
-print("Client 2 Name:", client2.name)
+print("Client 1 Name:", client1.name)
 print("Guest 1 Address:", guest1.address)
-print("Venue 2 Contact:", venue2.contact)
+print("Venue 1 Contact:", venue1.contact)
 print("Caterer 1 Menu:", caterer1.menu)
