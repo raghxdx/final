@@ -113,12 +113,14 @@ guest2 = Guest(2, "Aisha Ali", "202 ST", "0501112166")
 venue1 = Venue(1, "Hilton Hotel", "202 AD ST", "info@hiltonhotel.com", 50, 200)
 venue2 = Venue(2, "Rose Garden", "303 AD ST", "info@rosegarden.com", 20, 100)
 
+
 #creating suppliers
 caterer1 = Caterer(1, "Delicious Catering", "007 ST", "catering@delicious.com", "Menu A", 20, 150)
-cleaning_company1 = CleaningCompany(2, "Sparkling Cleaners", "2002 ST", "info@sparklingcleaners.com", "Cleaning Services")
-decorations_company1 = DecorationsCompany(3, "Creative Decor", "505 ST", "contact@creativedecor.com", "Decorations Services")
-entertainment_company1 = EntertainmentCompany(4, "Music & More", "006 ST", "info@musicandmore.com", "Entertainment Services")
+cleaning_company1 = CleaningCompany(2, "Cleaners", "2002 ST", "info@cleaners.com", "Cleaning Services")
+decorations_company1 = DecorationsCompany(3, "Creative Decorations", "505 ST", "contact@creativedecorations.com", "Decorations Services")
+entertainment_company1 = EntertainmentCompany(4, "Music & Entertainment", "006 ST", "info@musicaentertainment.com", "Entertainment Services")
 furniture_supplier1 = FurnitureSupplier(5, "Comfort Furniture", "343 ST", "info@comfortfurniture.com", "Furniture Services")
+
 
 #pritning to display all the information
 print("Employee 1 Name:", employee1.name)
