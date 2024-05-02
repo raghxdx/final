@@ -1,0 +1,147 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+# Initial data structure
+data = {
+    'employees': {
+        47899: {'Name': 'Susan Meyers', 'Department': 'Sales', 'Job Title': 'Manager', 'Basic Salary': '37,500', 'Manager ID': ''},
+        81774: {'Name': 'Joy Rogers', 'Department': 'Sales', 'Job Title': 'Manager', 'Basic Salary': '24,000', 'Manager ID': ''},
+        11234: {'Name': 'Shyam Sundar', 'Department': 'Sales', 'Job Title': 'Salesperson', 'Basic Salary': '20,000', 'Manager ID': '47899'},
+        98394: {'Name': 'Mariam Khalid', 'Department': 'Sales', 'Job Title': 'Salesperson', 'Basic Salary': '20,000', 'Manager ID': '81774'},
+        98637: {'Name': 'Salma J Sam', 'Department': 'Sales', 'Job Title': 'Salesperson', 'Basic Salary': '20,000', 'Manager ID': '47899'}
+    },
+    'events': {
+        1: {'Event Type': "Wedding", 'Theme': "Classic", 'Date': "2024-05-25", 'Time': "15:00", 'Duration': 4, 'Venue Address': "222 ST"},
+        2: {'Event Type': "Birthday", 'Theme': "Superhero", 'Date': "2024-06-10", 'Time': "14:00", 'Duration': 3, 'Venue Address': "333 ST"}
+    },
+    'clients': {
+        1: {'Name': "Sara Khalid", 'Address': "454 ST", 'Contact Details': "0506110100", 'Budget': 5000},
+        2: {'Name': "Ahmed Sultan", 'Address': "444 ST", 'Contact Details': "0561001555", 'Budget': 8000}
+    },
+    'guests': {
+        1: {'Name': "Reem Mohamed", 'Address': "101 ST", 'Contact Details': "0540003333"},
+        2: {'Name': "Aisha Ali", 'Address': "202 ST", 'Contact Details': "0501112166"}
+    },
+    'venues': {
+        1: {'Name': "Hilton Hotel", 'Address': "202 AD ST", 'Contact': "info@hiltonhotel.com", 'Min Guests': 50, 'Max Guests': 200},
+        2: {'Name': "Rose Garden", 'Address': "303 AD ST", 'Contact': "info@rosegarden.com", 'Min Guests': 20, 'Max Guests': 100}
+    },
+    'suppliers': {
+        1: {'Name': "Delicious Catering", 'Address': "007 ST", 'Contact Details': "catering@delicious.com", 'Menu': "Menu A", 'Capacity': 20, 'Cost Per Person': 150},
+        2: {'Name': "Cleaners", 'Address': "2002 ST", 'Contact Details': "info@cleaners.com", 'Services': "Cleaning Services"},
+        3: {'Name': "Creative Decorations", 'Address': "505 ST", 'Contact Details': "contact@creativedecorations.com", 'Services': "Decorations Services"},
+        4: {'Name': "Music & Entertainment", 'Address': "006 ST", 'Contact Details': "info@musicaentertainment.com", 'Services': "Entertainment Services"},
+        5: {'Name': "Comfort Furniture", 'Address': "343 ST", 'Contact Details': "info@comfortfurniture.com", 'Services': "Furniture Services"}
+    }
+}
+
+# Function to add details for a selected entity type
+def add_details(entity_type, entity_id):
+    # Function to handle Add button click
+    def handle_add():
+        new_data = {}
+        for attr in attributes:
+            new_data[attr] = entry_vars[attr].get()
+        # Check if entity ID already exists
+        if int(entity_id) in data[entity_type]:
+            messagebox.showerror("Error", f"Entity with ID {entity_id} already exists.")
+        else:
+            data[entity_type][int(entity_id)] = new_data
+            messagebox.showinfo("Success", f"Details added for {entity_type} with ID {entity_id}.")
+            add_window.destroy()
+
+    # Create add window
+    add_window = tk.Toplevel()
+    add_window.title(f"Add {entity_type.capitalize()} Details")
+
+    # Add entry fields for each attribute
+    attributes = list(data[entity_type][next(iter(data[entity_type]))].keys())
+    entry_vars = {}
+    for i, attr in enumerate(attributes):
+        tk.Label(add_window, text=attr).grid(row=i, column=0, sticky="w")
+        entry_vars[attr] = tk.StringVar()
+        tk.Entry(add_window, textvariable=entry_vars[attr]).grid(row=i, column=1)
+
+    # Add button to confirm addition
+    add_button = tk.Button(add_window, text="Add", command=handle_add)
+    add_button.grid(row=len(attributes), columnspan=2)
+
+# Function to delete details for a selected entity type
+def delete_details(entity_type, entity_id):
+    if int(entity_id) in data[entity_type]:
+        del data[entity_type][int(entity_id)]
+        messagebox.showinfo("Success", f"Details deleted for {entity_type} with ID {entity_id}.")
+    else:
+        messagebox.showerror("Error", f"No details found for {entity_type} with ID {entity_id}.")
+
+# Function to modify details for a selected entity type
+def modify_details(entity_type, entity_id):
+    # Function to handle Modify button click
+    def handle_modify():
+        new_data = {}
+        for attr in attributes:
+            new_data[attr] = entry_vars[attr].get()
+        data[entity_type][int(entity_id)] = new_data
+        messagebox.showinfo("Success", f"Details modified for {entity_type} with ID {entity_id}.")
+        modify_window.destroy()
+
+    # Create modify window
+    modify_window = tk.Toplevel()
+    modify_window.title(f"Modify {entity_type.capitalize()} Details")
+
+    # Add entry fields for each attribute
+    attributes = list(data[entity_type][int(entity_id)].keys())
+    entry_vars = {}
+    for i, attr in enumerate(attributes):
+        tk.Label(modify_window, text=attr).grid(row=i, column=0, sticky="w")
+        entry_vars[attr] = tk.StringVar(value=data[entity_type][int(entity_id)][attr])
+        tk.Entry(modify_window, textvariable=entry_vars[attr]).grid(row=i, column=1)
+
+    # Add button to confirm modification
+    modify_button = tk.Button(modify_window, text="Modify", command=handle_modify)
+    modify_button.grid(row=len(attributes), columnspan=2)
+
+# Function to display details for a selected entity type
+def display_details(entity_type, entity_id):
+    if int(entity_id) in data[entity_type]:
+        details = data[entity_type][int(entity_id)]
+        detail_str = '\n'.join([f"{key}: {value}" for key, value in details.items()])
+        messagebox.showinfo(f"{entity_type.capitalize()} Details", detail_str)
+    else:
+        messagebox.showerror("Error", f"No details found for {entity_type} with ID {entity_id}.")
+
+# GUI Setup
+app = tk.Tk()
+app.title("Entity Management System")
+
+# Entity Type Selection
+entity_label = tk.Label(app, text="Select Entity Type:")
+entity_label.pack()
+
+entity_combobox = ttk.Combobox(app, values=list(data.keys()))
+entity_combobox.pack()
+
+# ID Entry
+id_label = tk.Label(app, text="Enter Entity ID Number:")
+id_label.pack()
+
+id_entry = tk.Entry(app)
+id_entry.pack()
+
+# Add Button
+add_button = tk.Button(app, text="Add", command=lambda: add_details(entity_combobox.get(), id_entry.get()))
+add_button.pack()
+
+# Delete Button
+delete_button = tk.Button(app, text="Delete", command=lambda: delete_details(entity_combobox.get(), id_entry.get()))
+delete_button.pack()
+
+# Modify Button
+modify_button = tk.Button(app, text="Modify", command=lambda: modify_details(entity_combobox.get(), id_entry.get()))
+modify_button.pack()
+
+# Display Button
+display_button = tk.Button(app, text="Display", command=lambda: display_details(entity_combobox.get(), id_entry.get()))
+display_button.pack()
+
+app.mainloop()
